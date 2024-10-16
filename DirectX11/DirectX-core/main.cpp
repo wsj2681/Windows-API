@@ -2,7 +2,7 @@
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline, int iCmdshow)
 {
-    Core* core;
+    Core* core = nullptr;
     bool result;
 
 
@@ -12,8 +12,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline,
         return 0;
     }
 
-    result = core->Initalize();
-    if (result)
+    if (result = core->Initalize())
     {
         core->Run();
     }
