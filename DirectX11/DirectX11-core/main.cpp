@@ -2,25 +2,24 @@
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline, int iCmdshow)
 {
-    Core* Core;
+    Core* core;
     bool result;
 
 
-    Core = new Core;
-    if (!System)
+    core = new Core;
+    if (!core)
     {
         return 0;
     }
 
-    result = Core->Initialize();
+    result = core->Initalize();
     if (result)
     {
-        Core->Run();
+        core->Run();
     }
 
-    System->Shutdown();
-    delete System;
-    System = 0;
+    core->Destroy();
+    delete core;
 
     return 0;
 }
