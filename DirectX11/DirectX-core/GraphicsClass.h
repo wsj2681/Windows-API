@@ -15,6 +15,7 @@ class GraphicsClass
     Camera* camera = nullptr;
     Model* model = nullptr;
     ColorShader* colorshader = nullptr;
+
 	bool Render();
 
 public:

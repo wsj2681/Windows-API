@@ -97,11 +97,11 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Color.vs">
+    <FxCompile Include="Color.ps">
       <Filter>소스 파일\4.Shader</Filter>
-    </None>
-    <None Include="Color.ps">
+    </FxCompile>
+    <FxCompile Include="Color.vs">
       <Filter>소스 파일\4.Shader</Filter>
-    </None>
+    </FxCompile>
   </ItemGroup>
 </Project>
