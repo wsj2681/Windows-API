@@ -2,7 +2,7 @@
 
 bool GraphicsClass::Render()
 {
-    return false;
+    return true;
 }
 
 GraphicsClass::GraphicsClass()
@@ -19,7 +19,7 @@ GraphicsClass::~GraphicsClass()
 
 bool GraphicsClass::Initialize(int, int, HWND)
 {
-    return false;
+    return true;
 }
 
 void GraphicsClass::Destroy()
@@ -28,5 +28,5 @@ void GraphicsClass::Destroy()
 
 bool GraphicsClass::Frame()
 {
-    return false;
+    return true;
 }
