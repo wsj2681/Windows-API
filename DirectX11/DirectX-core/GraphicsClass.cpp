@@ -2,7 +2,7 @@
 
 bool GraphicsClass::Render()
 {
-    d3d->BeginScene(0.8f, 0.8f, 0.f, 1.f);
+    d3d->BeginScene(0.4f, 0.1f, 0.6f, 1.f);
 
     d3d->EndScene();
     return true;
