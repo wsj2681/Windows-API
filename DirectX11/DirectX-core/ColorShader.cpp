@@ -25,7 +25,7 @@ bool ColorShader::Initialize(ID3D11Device* dev, HWND hWnd)
 
 void ColorShader::Destroy()
 {
-	ShutdoenShader();
+	ShutdownShader();
 }
 
 bool ColorShader::Render(ID3D11DeviceContext* devcon, int indexcount, XMMATRIX world, XMMATRIX view, XMMATRIX projection)
@@ -47,6 +47,12 @@ bool ColorShader::InitializeShader(ID3D11Device* dev, HWND hWnd, const WCHAR* vs
 	ID3D10Blob* pixelShaderBuffer = nullptr;
 
 	HR(D3DCompileFromFile(vsfilename, nullptr, nullptr, "ColorVertexShader", "vs_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, &vertexShaderBuffer, &errorMessage));
+
+	if (errorMessage)
+	{
+		OutputShaderErrorMessage(errorMessage, hWnd, vsfilename);
+	}
+
 	HR(D3DCompileFromFile(psfilename, nullptr, nullptr, "ColorPixelShader", "ps_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, &pixelShaderBuffer, &errorMessage));
 
 	HR(dev->CreateVertexShader(vertexShaderBuffer->GetBufferPointer(), vertexShaderBuffer->GetBufferSize(), nullptr, &vertexshader));
@@ -96,14 +102,14 @@ void ColorShader::ShutdownShader()
 	SAFE_RELEASE(vertexshader);
 }
 
-void ColorShader::OutputShaderErrorMessage(ID3D10Blob* errorMessage, HWND hWnd, WCHAR* shaderFilename)
+void ColorShader::OutputShaderErrorMessage(ID3D10Blob* errorMessage, HWND hWnd, const WCHAR* shaderFilename)
 {
 	char* compileErrors = nullptr;
 	
 	ofstream of;
 
 	compileErrors = (char*)(errorMessage->GetBufferPointer());
-	unsigned int bufferSize = errorMessage->GetBufferSize();
+	size_t bufferSize = errorMessage->GetBufferSize();
 	of.open("shader-error.txt");
 	for (int i = 0; i < bufferSize; ++i)
 	{
@@ -121,7 +127,7 @@ bool ColorShader::SetShaderParameters(ID3D11DeviceContext* devcon, XMMATRIX worl
 {
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
 	MatrixBufferType* dataPtr;
-	unsigned int bufferNumber;
+	size_t bufferNumber;
 
 
 	// 행렬을 transpose하여 셰이더에서 사용할 수 있게 합니다.
