@@ -210,47 +210,88 @@ bool D3DClass::Initialize(int screenwidth, int screenheight, bool vsync, HWND hW
 
 	devcon->RSSetViewports(1, &viewport);
 
-	float fieldOfView;
-	float screenAspect;
+	float fieldOfView = (float)XM_PI / 4.f;
+	float screenAspect = (float)screenwidth / (float)screenheight;
 
+	this->projection = XMMatrixPerspectiveFovLH(fieldOfView, screenAspect, screenNear, screenDepth);
+	this->world = XMMatrixIdentity();
 
-	return false;
+	XMMatrixOrthographicLH(screenwidth, screenheight, screenNear, screenDepth);
+
+	return true;
 }
 
 void D3DClass::Destroy()
 {
+	if (swapchain)
+	{
+		swapchain->SetFullscreenState(false, nullptr);
+	}
+
+	SAFE_RELEASE(rasterState);
+	SAFE_RELEASE(depthStencilView);
+	SAFE_RELEASE(depthStencilState);
+	SAFE_RELEASE(depthStencilBuffer);
+	SAFE_RELEASE(renderTargetView);
+	SAFE_RELEASE(devcon);
+	SAFE_RELEASE(dev);
+	SAFE_RELEASE(swapchain);
+
 }
 
-void D3DClass::BeginScene(float, float, float, float)
+void D3DClass::BeginScene(float r, float g, float b, float a)
 {
+	float color[4];
+
+	color[0] = r;
+	color[1] = g;
+	color[2] = b;
+	color[3] = a;
+
+	devcon->ClearRenderTargetView(renderTargetView, color);
+	devcon->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH, 1.f, 0);
+
 }
 
 void D3DClass::EndScene()
 {
+	if (vsync_enabled)
+	{
+		swapchain->Present(1, 0);
+	}
+	else
+	{
+		swapchain->Present(0, 0);
+	}
 }
 
 ID3D11Device* D3DClass::getDevice()
 {
-	return nullptr;
+	return this->dev;
 }
 
 ID3D11DeviceContext* D3DClass::getDeviceContext()
 {
-	return nullptr;
+	return this->devcon;
 }
 
-void D3DClass::GetProjectionMatrix(XMMATRIX&)
+void D3DClass::GetProjectionMatrix(XMMATRIX& projectionMatrix)
 {
+	projectionMatrix = this->projection;
 }
 
-void D3DClass::GetWorldMatrix(XMMATRIX&)
+void D3DClass::GetWorldMatrix(XMMATRIX& worldMatrix)
 {
+	worldMatrix = this->world;
 }
 
-void D3DClass::GetOrthoMatrix(XMMATRIX&)
+void D3DClass::GetOrthoMatrix(XMMATRIX& orthoMatrix)
 {
+	orthoMatrix = this->ortho;
 }
 
-void D3DClass::GetGPUInfo(char*, int&)
+void D3DClass::GetGPUInfo(char* gpuname, int& memory)
 {
+	strcpy_s(gpuname, 128, GPUdesc);
+	memory = GPUMemory;
 }
