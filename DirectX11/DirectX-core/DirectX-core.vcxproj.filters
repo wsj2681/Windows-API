@@ -5,13 +5,33 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="헤더 파일">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="리소스 파일">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="소스 파일\1.Core">
+      <UniqueIdentifier>{7075c879-8c48-465a-b03f-7ec8bef709fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Graphics">
+      <UniqueIdentifier>{3d4c7ca6-64a9-4f29-a2d5-279812cfe7cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\3. Input">
+      <UniqueIdentifier>{d63cb5e1-f78e-47d5-9914-e6c6b64abf81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Graphics\i.D3Ddevice">
+      <UniqueIdentifier>{5ba23502-8350-4f9c-ae54-e21b7c40a0d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Graphics\j.Camera">
+      <UniqueIdentifier>{05f9d650-5e1f-44f4-858f-f9acc6f2d983}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Graphics\k.ColorShader">
+      <UniqueIdentifier>{f7bcfbcb-e3f7-4b73-a88b-25c7dea574e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\2.Graphics\l.Model">
+      <UniqueIdentifier>{49d4a36c-8c36-4c88-963a-16fc4f5e8845}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\4.Shader">
+      <UniqueIdentifier>{5b5e989c-26a6-4349-8dc3-d7fe93eac9c7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -28,28 +48,60 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Core.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicsClass.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="InputClass.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Core.cpp">
+      <Filter>소스 파일\1.Core</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsClass.cpp">
+      <Filter>소스 파일\2.Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="InputClass.cpp">
+      <Filter>소스 파일\3. Input</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DClass.cpp">
+      <Filter>소스 파일\2.Graphics\i.D3Ddevice</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>소스 파일\2.Graphics\j.Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="ColorShader.cpp">
+      <Filter>소스 파일\2.Graphics\k.ColorShader</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>소스 파일\2.Graphics\l.Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>소스 파일\1.Core</Filter>
     </ClInclude>
     <ClInclude Include="GraphicsClass.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>소스 파일\2.Graphics</Filter>
     </ClInclude>
     <ClInclude Include="InputClass.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>소스 파일\3. Input</Filter>
     </ClInclude>
+    <ClInclude Include="D3DClass.h">
+      <Filter>소스 파일\2.Graphics\i.D3Ddevice</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>소스 파일\2.Graphics\j.Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorShader.h">
+      <Filter>소스 파일\2.Graphics\k.ColorShader</Filter>
+    </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>소스 파일\2.Graphics\l.Model</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Color.vs">
+      <Filter>소스 파일\4.Shader</Filter>
+    </None>
+    <None Include="Color.ps">
+      <Filter>소스 파일\4.Shader</Filter>
+    </None>
   </ItemGroup>
 </Project>
