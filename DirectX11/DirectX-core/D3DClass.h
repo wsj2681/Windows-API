@@ -4,11 +4,7 @@
 #include <d3d11.h>
 #include <dxgi1_4.h>
 #include <D3Dcompiler.h>
-#include <DirectXPackedVector.h>
-#include <DirectXColors.h>
-#include <DirectXCollision.h>
 #include <DirectXMath.h>
-#include <Mmsystem.h>
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "dxgi.lib")

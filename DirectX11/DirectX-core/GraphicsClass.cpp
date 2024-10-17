@@ -30,7 +30,6 @@ bool GraphicsClass::Initialize(int screenwidth, int screenheight, HWND hWnd)
         return false;
     }
 
-
     return true;
 }
 
