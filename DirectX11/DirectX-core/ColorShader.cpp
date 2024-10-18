@@ -126,26 +126,20 @@ void ColorShader::OutputShaderErrorMessage(ID3D10Blob* errorMessage, HWND hWnd, 
 bool ColorShader::SetShaderParameters(ID3D11DeviceContext* devcon, XMMATRIX world, XMMATRIX view, XMMATRIX projection)
 {
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
-	MatrixBufferType* dataPtr;
-	size_t bufferNumber;
-
-
-	// 행렬을 transpose하여 셰이더에서 사용할 수 있게 합니다.
 	world = XMMatrixTranspose(world);
 	view = XMMatrixTranspose(view);
 	projection = XMMatrixTranspose(projection);
 
-	// 상수 버퍼의 내용을 쓸 수 있도록 잠급니다.
 	HR(devcon->Map(matrixbuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource));
 
+	MatrixBufferType* dataPtr;
 	dataPtr = (MatrixBufferType*)mappedResource.pData;
 	dataPtr->world = world;
 	dataPtr->view = view;
 	dataPtr->projection = projection;
 	devcon->Unmap(matrixbuffer, 0);
 
-	bufferNumber = 0;
-
+	size_t bufferNumber = 0;
 	devcon->VSSetConstantBuffers(bufferNumber, 1, &matrixbuffer);
 
 	return true;

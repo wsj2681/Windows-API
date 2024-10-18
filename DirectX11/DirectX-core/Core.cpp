@@ -124,8 +124,7 @@ bool Core::Frame()
 		return false;
 	}
 
-	result = graphics->Frame();
-	if (!result)
+	if (!graphics->Frame())
 	{
 		return false;
 	}

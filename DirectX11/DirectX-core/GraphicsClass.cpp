@@ -4,7 +4,7 @@ bool GraphicsClass::Render()
 {
     XMMATRIX world, view, projection;
 
-    d3d->BeginScene(0.0f, 0.0f, 0.0f, 1.f);
+    d3d->BeginScene(0.6f, 0.3f, 0.6f, 1.f);
 
     camera->Render();
 
