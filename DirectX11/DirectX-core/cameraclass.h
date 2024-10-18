@@ -22,12 +22,12 @@ public:
 	Camera&& operator=(const Camera&&) = delete;
 	~Camera() = default;
 
-	void SetPosition(float, float, float);
-	void SetRotation(float, float, float);
+	void SetPosition(float, float, float) noexcept;
+	void SetRotation(float, float, float) noexcept;
 
 	XMFLOAT3 GetPosition();
 	XMFLOAT3 GetRotation();
 
-	void Render();
-	void GetViewMatrix(XMMATRIX&);
+	void Render() noexcept;
+	void GetViewMatrix(XMMATRIX&) noexcept;
 };

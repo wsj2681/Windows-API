@@ -63,7 +63,7 @@ bool GraphicsClass::Render()
 {
     XMMATRIX worldMatrix, viewMatrix, projectionMatrix;
 
-    d3d->BeginScene(0.8f, 0.8f, 0.f, 1.f);
+    d3d->BeginScene(0.1f, 0.1f, 0.1f, 1.f);
 
     camera->Render();
 

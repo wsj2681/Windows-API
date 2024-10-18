@@ -1,6 +1,6 @@
 #include "cameraclass.h"
 
-void Camera::SetPosition(float x, float y, float z)
+void Camera::SetPosition(float x, float y, float z) noexcept
 {
 	positionX = x;
 	positionY = y;
@@ -8,7 +8,7 @@ void Camera::SetPosition(float x, float y, float z)
 }
 
 
-void Camera::SetRotation(float x, float y, float z)
+void Camera::SetRotation(float x, float y, float z) noexcept
 {
 	rotationX = x;
 	rotationY = y;
@@ -28,7 +28,7 @@ XMFLOAT3 Camera::GetRotation()
 }
 
 
-void Camera::Render()
+void Camera::Render() noexcept
 {
 	XMFLOAT3 up = { 0.f, 1.f, 0.f };
 	XMFLOAT3 position = { positionX, positionY, positionZ };
@@ -55,7 +55,7 @@ void Camera::Render()
 }
 
 
-void Camera::GetViewMatrix(XMMATRIX& viewMatrix)
+void Camera::GetViewMatrix(XMMATRIX& viewMatrix) noexcept
 {
 	viewMatrix = this->viewMatrix;
 }
