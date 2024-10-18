@@ -1,18 +1,6 @@
 #include "InputClass.h"
 
-InputClass::InputClass()
-{
-}
-
-InputClass::InputClass(const InputClass&)
-{
-}
-
-InputClass::~InputClass()
-{
-}
-
-void InputClass::Initialize()
+void InputClass::Initialize() noexcept
 {
 	for (int i = 0; i < 256; ++i)
 	{
@@ -20,12 +8,12 @@ void InputClass::Initialize()
 	}
 }
 
-void InputClass::KeyDown(unsigned int input)
+void InputClass::KeyDown(unsigned int input) noexcept
 {
 	keys[input] = true;
 }
 
-void InputClass::KeyUp(unsigned int input)
+void InputClass::KeyUp(unsigned int input) noexcept
 {
 	keys[input] = false;
 }

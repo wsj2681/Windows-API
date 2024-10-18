@@ -32,10 +32,12 @@ class D3DClass
     XMMATRIX ortho;
 
 public:
-
-    D3DClass();
-    D3DClass(const D3DClass&);
-    ~D3DClass();
+    D3DClass() = default;
+    D3DClass(const D3DClass&) = delete;
+    D3DClass& operator=(const D3DClass&) = delete;
+    D3DClass(D3DClass&&) = delete;
+    D3DClass&& operator=(const D3DClass&&) = delete;
+    ~D3DClass() = default;
 
     bool Initialize(int, int, bool, HWND, bool, float, float);
     void Destroy();
@@ -77,3 +79,5 @@ public:
 #define SAFE_RELEASE(ptr) {if (ptr) ptr->Release(); ptr = nullptr; }
 #define SAFE_DELETE(ptr) {if (ptr) delete ptr; ptr = nullptr; }
 #define SAFE_DELETEARR(ptr) {if (ptr) delete[] ptr; ptr = nullptr; }
+#define CHECK_MAKE(ptr) {if (!ptr) return false;}
+#define CHECK_RESULT(ptr, str) {if (!ptr) {MessageBox(hWnd, str, L"Error", MB_OK); return false;} }

@@ -12,18 +12,21 @@ const float SCREEN_NEAR = 0.1f;
 class GraphicsClass
 {
     D3DClass* d3d = nullptr;
-    CameraClass* camera = nullptr;
-    ModelClass* model = nullptr;
-    ColorShaderClass* colorshader = nullptr;
+    Camera* camera = nullptr;
+    Model* model = nullptr;
+    ColorShader* colorshader = nullptr;
 	bool Render();
 
 public:
-    GraphicsClass();
-    GraphicsClass(const GraphicsClass&);
-    ~GraphicsClass();
+	GraphicsClass() = default;
+	GraphicsClass(const GraphicsClass&) = delete;
+	GraphicsClass& operator=(const GraphicsClass&) = delete;
+	GraphicsClass(GraphicsClass&&) = delete;
+	GraphicsClass&& operator=(const GraphicsClass&&) = delete;
+	~GraphicsClass() = default;
 
     bool Initialize(int, int, HWND);
-    void Destroy();
+    void Destroy() noexcept;
     bool Frame();
 };
 

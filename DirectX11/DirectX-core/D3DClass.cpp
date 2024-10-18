@@ -1,23 +1,11 @@
 #include "D3DClass.h"
 
-D3DClass::D3DClass()
-{
-}
-
-D3DClass::D3DClass(const D3DClass&)
-{
-}
-
-D3DClass::~D3DClass()
-{
-}
-
 bool D3DClass::Initialize(int screenwidth, int screenheight, bool vsync, HWND hWnd, bool fullscreen, float screenDepth, float screenNear)
 {
 	IDXGIFactory* factory = nullptr;
 	IDXGIAdapter* adapter = nullptr;
 	IDXGIOutput* adapteroutput = nullptr;
-	unsigned int numModes;
+	unsigned int numModes = 0;
 	DXGI_MODE_DESC* displayModeList = nullptr;
 
 
@@ -39,7 +27,7 @@ bool D3DClass::Initialize(int screenwidth, int screenheight, bool vsync, HWND hW
 
 	unsigned int numerator = 0, denominator = 0;
 
-	for (int i = 0; i < numModes; ++i)
+	for (unsigned int i = 0; i < numModes; ++i)
 	{
 		if (displayModeList[i].Width == (unsigned int)screenwidth && displayModeList[i].Height == (unsigned int)screenheight)
 		{
@@ -59,17 +47,11 @@ bool D3DClass::Initialize(int screenwidth, int screenheight, bool vsync, HWND hW
 		return false;
 	}
 
-	delete[] displayModeList;
-	displayModeList = nullptr;
+	SAFE_DELETEARR(displayModeList);
 
-	adapteroutput->Release();
-	adapteroutput = nullptr;
-
-	adapter->Release();
-	adapter = nullptr;
-
-	factory->Release();
-	factory = nullptr;
+	SAFE_RELEASE(adapteroutput);
+	SAFE_RELEASE(adapter);
+	SAFE_RELEASE(factory);
 
 	DXGI_SWAP_CHAIN_DESC swapChainDesc;
 	ZeroMemory(&swapChainDesc, sizeof(DXGI_SWAP_CHAIN_DESC));
@@ -161,13 +143,11 @@ bool D3DClass::Initialize(int screenwidth, int screenheight, bool vsync, HWND hW
 	depthStencilDesc.StencilReadMask = 0xFF;
 	depthStencilDesc.StencilWriteMask = 0xFF;
 
-	// Stencil operations if pixel is front-facing.
 	depthStencilDesc.FrontFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
 	depthStencilDesc.FrontFace.StencilDepthFailOp = D3D11_STENCIL_OP_INCR;
 	depthStencilDesc.FrontFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
 	depthStencilDesc.FrontFace.StencilFunc = D3D11_COMPARISON_ALWAYS;
 
-	// Stencil operations if pixel is back-facing.
 	depthStencilDesc.BackFace.StencilFailOp = D3D11_STENCIL_OP_KEEP;
 	depthStencilDesc.BackFace.StencilDepthFailOp = D3D11_STENCIL_OP_DECR;
 	depthStencilDesc.BackFace.StencilPassOp = D3D11_STENCIL_OP_KEEP;
@@ -216,7 +196,7 @@ bool D3DClass::Initialize(int screenwidth, int screenheight, bool vsync, HWND hW
 	this->projection = XMMatrixPerspectiveFovLH(fieldOfView, screenAspect, screenNear, screenDepth);
 	this->world = XMMatrixIdentity();
 
-	XMMatrixOrthographicLH(screenwidth, screenheight, screenNear, screenDepth);
+	XMMatrixOrthographicLH((float)screenwidth, (float)screenheight, screenNear, screenDepth);
 
 	return true;
 }
@@ -236,18 +216,11 @@ void D3DClass::Destroy()
 	SAFE_RELEASE(devcon);
 	SAFE_RELEASE(dev);
 	SAFE_RELEASE(swapchain);
-
 }
 
 void D3DClass::BeginScene(float r, float g, float b, float a)
 {
-	float color[4];
-
-	color[0] = r;
-	color[1] = g;
-	color[2] = b;
-	color[3] = a;
-
+	float color[4] = {r, g, b, a};
 	devcon->ClearRenderTargetView(renderTargetView, color);
 	devcon->ClearDepthStencilView(depthStencilView, D3D11_CLEAR_DEPTH, 1.f, 0);
 

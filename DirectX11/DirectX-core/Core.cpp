@@ -1,18 +1,5 @@
 #include "Core.h"
 
-Core::Core()
-{
-	
-}
-
-Core::Core(const Core&)
-{
-}
-
-Core::~Core()
-{
-}
-
 bool Core::Initalize()
 {
 	int screenWidth = 0;
@@ -34,9 +21,8 @@ bool Core::Initalize()
 	{
 		return false;
 	}
-	result = graphics->Initialize(screenWidth, screenHeight, hWnd);
 
-	if (!result)
+	if (!graphics->Initialize(screenWidth, screenHeight, hWnd))
 	{
 		return false;
 	}
@@ -44,7 +30,7 @@ bool Core::Initalize()
 	return true;
 }
 
-void Core::Destroy()
+void Core::Destroy() noexcept
 {
 	if (graphics)
 	{
@@ -62,7 +48,7 @@ void Core::Destroy()
 	ShutdownWindows();
 }
 
-void Core::Run()
+void Core::Run() noexcept
 {
 	MSG msg;
 	bool done = false;
@@ -117,15 +103,12 @@ LRESULT Core::MessageHandler(HWND hWnd, UINT msg, WPARAM wparam, LPARAM lparam)
 
 bool Core::Frame()
 {
-	bool result = true;
-
 	if (input->IsKeyDown(VK_ESCAPE))
 	{
 		return false;
 	}
 
-	result = graphics->Frame();
-	if (!result)
+	if (!graphics->Frame())
 	{
 		return false;
 	}
@@ -133,7 +116,7 @@ bool Core::Frame()
 	return true;
 }
 
-void Core::InitializeWindows(int& width, int& height)
+void Core::InitializeWindows(int& width, int& height) noexcept
 {
 	WNDCLASSEX wc;
 	DEVMODE dmScreenSettings;
@@ -204,7 +187,7 @@ void Core::InitializeWindows(int& width, int& height)
 	ShowCursor(true);
 }
 
-void Core::ShutdownWindows()
+void Core::ShutdownWindows() noexcept
 {
 	ShowCursor(true);
 

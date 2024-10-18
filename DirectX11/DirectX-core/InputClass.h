@@ -4,13 +4,16 @@ class InputClass
 	bool keys[256];
 
 public:
-    InputClass();
-    InputClass(const InputClass&);
-    ~InputClass();
+    InputClass() = default;
+    InputClass(const InputClass&) = delete;
+    InputClass& operator=(const InputClass&) = delete;
+    InputClass(const InputClass&&) = delete;
+    InputClass&& operator=(const InputClass&&) = delete;
+    ~InputClass() = default;
 
-    void Initialize();
-    void KeyDown(unsigned int);
-    void KeyUp(unsigned int);
+    void Initialize() noexcept;
+    void KeyDown(unsigned int) noexcept;
+    void KeyUp(unsigned int) noexcept;
     bool IsKeyDown(unsigned int);
 };
 

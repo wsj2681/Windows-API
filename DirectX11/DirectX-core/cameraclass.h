@@ -1,26 +1,26 @@
-////////////////////////////////////////////////////////////////////////////////
-// Filename: cameraclass.h
-////////////////////////////////////////////////////////////////////////////////
-#ifndef _CAMERACLASS_H_
-#define _CAMERACLASS_H_
+#pragma once
 
-
-//////////////
-// INCLUDES //
-//////////////
 #include <directxmath.h>
 using namespace DirectX;
 
-
-////////////////////////////////////////////////////////////////////////////////
-// Class name: CameraClass
-////////////////////////////////////////////////////////////////////////////////
-class CameraClass
+class Camera
 {
+	float positionX = 0.f;
+	float positionY = 0.f;
+	float positionZ = 0.f;
+
+	float rotationX = 0.f;
+	float rotationY = 0.f;
+	float rotationZ = 0.f;
+	XMMATRIX viewMatrix;
+
 public:
-	CameraClass();
-	CameraClass(const CameraClass&);
-	~CameraClass();
+	Camera() = default;
+	Camera(const Camera&) = delete;
+	Camera& operator=(const Camera&) = delete;
+	Camera(Camera&&) = delete;
+	Camera&& operator=(const Camera&&) = delete;
+	~Camera() = default;
 
 	void SetPosition(float, float, float);
 	void SetRotation(float, float, float);
@@ -30,11 +30,4 @@ public:
 
 	void Render();
 	void GetViewMatrix(XMMATRIX&);
-
-private:
-	float m_positionX, m_positionY, m_positionZ;
-	float m_rotationX, m_rotationY, m_rotationZ;
-	XMMATRIX m_viewMatrix;
 };
-
-#endif
