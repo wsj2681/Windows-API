@@ -12,7 +12,7 @@ class Camera
 	float rotationX = 0.f;
 	float rotationY = 0.f;
 	float rotationZ = 0.f;
-	XMMATRIX viewMatrix;
+	XMMATRIX viewMatrix = XMMatrixIdentity();
 
 public:
 	Camera() = default;

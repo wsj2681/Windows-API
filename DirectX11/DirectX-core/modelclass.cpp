@@ -1,11 +1,7 @@
-////////////////////////////////////////////////////////////////////////////////
-// Filename: modelclass.cpp
-////////////////////////////////////////////////////////////////////////////////
 #include "modelclass.h"
 
 bool Model::Initialize(ID3D11Device* device)
 {
-	// Initialize the vertex and index buffers.
 	CHECK_MAKE(InitializeBuffers(device));
 
 	return true;
@@ -14,14 +10,12 @@ bool Model::Initialize(ID3D11Device* device)
 
 void Model::Destroy()
 {
-	// Destroy the vertex and index buffers.
 	ShutdownBuffers();
 }
 
 
 void Model::Render(ID3D11DeviceContext* deviceContext)
 {
-	// Put the vertex and index buffers on the graphics pipeline to prepare them for drawing.
 	RenderBuffers(deviceContext);
 }
 
